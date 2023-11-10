@@ -187,18 +187,6 @@ LightingSettings:
   m_PVRTiledBaking: 0
   m_NumRaysToShootPerTexel: -1
   m_RespectSceneVisibilityWhenBakingGI: 0
---- !u!114 &653362415 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8845778047209590950, guid: 59c548b7761a5f9449ae35beb77a9774,
-    type: 3}
-  m_PrefabInstance: {fileID: 5587578379724106611}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0845d118d123f0f45b3c5d973032712b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 8392607636671403412, guid: 9cd8aebee111b094e8b9c13cea9a0492,
@@ -335,46 +323,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 3445825654157354198, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 653362415}
-    - target: {fileID: 3445825654157354198, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCameraTo
-      objectReference: {fileID: 0}
-    - target: {fileID: 4836513661883827973, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 7142944799356486740, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 653362415}
-    - target: {fileID: 7142944799356486740, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCameraTo
-      objectReference: {fileID: 0}
-    - target: {fileID: 7408477804233398286, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8071564650705573908, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 653362415}
-    - target: {fileID: 8071564650705573908, guid: 59c548b7761a5f9449ae35beb77a9774,
-        type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MoveCameraTo
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

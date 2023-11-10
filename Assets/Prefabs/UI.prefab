@@ -121,9 +121,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JSONManager, Assembly-CSharp
-        m_MethodName: WriteMainCameraPosition
+      - m_Target: {fileID: 8228184132177820733}
+        m_TargetAssemblyTypeName: Wrapper.SaveLoadButtonWrapper, Assembly-CSharp
+        m_MethodName: Save
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -158,11 +158,11 @@ Transform:
   m_GameObject: {fileID: 1504172569747387828}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.86141586, z: -0, w: 0.5079004}
-  m_LocalPosition: {x: -604.8848, y: -158.4, z: 2.9989815}
+  m_LocalPosition: {x: -7.084825, y: 1.7, z: 2.998981}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1824074852442272870}
+  m_Father: {fileID: 6573010056556676065}
   m_LocalEulerAnglesHint: {x: 0, y: 118.952, z: 0}
 --- !u!1 &2385364822902540765
 GameObject:
@@ -195,6 +195,7 @@ Transform:
   m_Children:
   - {fileID: 7904468001221949526}
   - {fileID: 6537612656356635718}
+  - {fileID: 6573010056556676065}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3374940059963292886
@@ -229,7 +230,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7836207984199571569}
-  - {fileID: 5976983527831800330}
   m_Father: {fileID: 6537612656356635718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -491,6 +491,7 @@ GameObject:
   - component: {fileID: 9154409336721140585}
   - component: {fileID: 6263508698878005405}
   - component: {fileID: 8845778047209590950}
+  - component: {fileID: 8228184132177820733}
   m_Layer: 5
   m_Name: CameraMoveButtonCanvas
   m_TagString: Untagged
@@ -595,6 +596,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0845d118d123f0f45b3c5d973032712b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8228184132177820733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4035899407603155992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f901e5550b944c18a7076a258f23515b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4053971908559056002
@@ -708,7 +721,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6724583484941780567}
-  - {fileID: 6313477840077924497}
   m_Father: {fileID: 6537612656356635718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -921,7 +933,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6554046551206388399}
-  - {fileID: 1998818521924434077}
   m_Father: {fileID: 6537612656356635718}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -1127,12 +1138,46 @@ Transform:
   m_GameObject: {fileID: 6356525425149977813}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.42241773, z: -0, w: 0.9064013}
-  m_LocalPosition: {x: -913.26, y: -158.4, z: -2.6}
+  m_LocalPosition: {x: 3.44, y: 1.7, z: -2.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 499517602701989243}
+  m_Father: {fileID: 6573010056556676065}
   m_LocalEulerAnglesHint: {x: 0, y: -49.975002, z: 0}
+--- !u!1 &6791521438699189707
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6573010056556676065}
+  m_Layer: 0
+  m_Name: TravelPoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6573010056556676065
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6791521438699189707}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6313477840077924497}
+  - {fileID: 1998818521924434077}
+  - {fileID: 5976983527831800330}
+  m_Father: {fileID: 380808472558273696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7984571995988365293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,12 +1202,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7984571995988365293}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.9349494, z: -0, w: 0.3547811}
-  m_LocalPosition: {x: -1194.8, y: -158.4, z: 4.32}
+  m_LocalRotation: {x: 0, y: -0.9349496, z: 0, w: 0.35478064}
+  m_LocalPosition: {x: 4.1, y: 1.7, z: 4.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 3288949256556133086}
+  m_Father: {fileID: 6573010056556676065}
   m_LocalEulerAnglesHint: {x: 0, y: -138.44, z: 0}
 --- !u!1 &8593712009775028835
 GameObject:
@@ -1285,9 +1330,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: JSONManager, Assembly-CSharp
-        m_MethodName: ReadMainCameraPosition
+      - m_Target: {fileID: 8228184132177820733}
+        m_TargetAssemblyTypeName: Wrapper.SaveLoadButtonWrapper, Assembly-CSharp
+        m_MethodName: Load
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

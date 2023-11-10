@@ -13,7 +13,9 @@ namespace Manager
         [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private float travelSpeed = 1;
         
+        public Camera MainCamera => _mainCamera;
         private Camera _mainCamera;
+        
         private Transform _cachedMainCamTransform;
 
         private Tween _rotationTween;
@@ -22,7 +24,7 @@ namespace Manager
     
         private void Awake()
         {
-            // Set-up Singelton (a bit overkill for this project).
+            // Set-up Singleton (a bit overkill for this project).
             if (Instance != null)
             {
                 Destroy(Instance.gameObject);
