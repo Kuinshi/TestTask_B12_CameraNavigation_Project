@@ -16,8 +16,8 @@ namespace Manager
         private Camera _mainCamera;
         private Transform _cachedMainCamTransform;
 
-        private Tween rotationTween;
-        private Tween positionTween;
+        private Tween _rotationTween;
+        private Tween _positionTween;
 
     
         private void Awake()
@@ -50,26 +50,28 @@ namespace Manager
         /// Unsure if camera-height should have been maintained for this project, or not, decided not to.
         /// </summary>
 
-        private void MoveCamera(Vector3 startPos, Quaternion startRot, Vector3 endPos, Quaternion endRot)
+        private void MoveCamera(Vector3 startPos, Vector3 endPos, Quaternion endRot)
         {
             // Kill current tweens if still in the middle of moving. (More responsive behaviour than only allowing moves, when not tweening)
-            if (positionTween != null && positionTween.IsActive())
+            if (_positionTween != null && _positionTween.IsActive())
             {
-                positionTween.Kill();
+                _positionTween.Kill();
             }
 
-            if (rotationTween != null && rotationTween.IsActive())
+            if (_rotationTween != null && _rotationTween.IsActive())
             {
-                rotationTween.Kill();
+                _rotationTween.Kill();
             }
             
             // Collision Check & Moving
+            Vector3 rayDirection = endPos - startPos;
             float distance = Vector3.Distance(startPos, endPos);
-            bool isColliding = ObstacleCheck(startPos, startRot, endPos, endRot, distance);
+
+            bool isColliding = ObstacleCheck(startPos, rayDirection, distance, out var hitColliderBounds);
             
             if (isColliding)
             {
-                ObstacleAvoidance();
+                ObstacleAvoidance(startPos, endPos, endRot, hitColliderBounds, rayDirection);
             }
             else
             {
@@ -80,12 +82,22 @@ namespace Manager
         /// <summary>
         /// Checks if direct path is blocked.
         /// </summary>
-        private bool ObstacleCheck(Vector3 startPos, Quaternion startRot, Vector3 endPos, Quaternion endRot, float raycastDistance)
+        private bool ObstacleCheck(Vector3 startPos, Vector3 rayDirection, float raycastDistance, out Bounds hitColliderBounds)
         {
-            Ray ray = new Ray(startPos, endPos - startPos);
+            Ray ray = new Ray(startPos, rayDirection);
+            RaycastHit hit;
+            bool blocked = Physics.Raycast(ray, out hit, raycastDistance, obstacleLayer);
 
+            if (blocked)
+            {
+                hitColliderBounds = hit.collider.bounds;
+            }
+            else
+            {
+                hitColliderBounds = new Bounds();
+            }
 
-            return Physics.Raycast(ray, raycastDistance, obstacleLayer);
+            return blocked;
         }
 
         /// <summary>
@@ -93,22 +105,49 @@ namespace Manager
         /// </summary>
         public void MoveCameraFromCurrentPose(Transform endPose)
         {
-            MoveCamera(_cachedMainCamTransform.position, _cachedMainCamTransform.rotation, endPose.position, endPose.rotation);
+            MoveCamera(_cachedMainCamTransform.position, endPose.position, endPose.rotation);
         }
 
         /// <summary>
-        /// Tweens Camera from start pose to target pose
+        /// Tweens Camera from start pose to target pose.
         /// </summary>
         private void MoveDirectly(Vector3 endPos, Quaternion endRot, float travelDistance)
         {
             float tweenTime = travelDistance / travelSpeed;
-            positionTween = _cachedMainCamTransform.DOMove(endPos, tweenTime).SetEase(Ease.InOutQuad);
-            rotationTween = _cachedMainCamTransform.DORotate(endRot.eulerAngles, tweenTime).SetEase(Ease.InOutQuad);
+            _positionTween = _cachedMainCamTransform.DOMove(endPos, tweenTime).SetEase(Ease.InOutQuad);
+            _rotationTween = _cachedMainCamTransform.DORotate(endRot.eulerAngles, tweenTime).SetEase(Ease.InOutQuad);
         }
 
-        private void ObstacleAvoidance()
+        /// <summary>
+        /// Calculates a curved camera path around the hit obstacle and moves tweens camera along that path.
+        /// </summary>
+        private void ObstacleAvoidance(Vector3 startPos, Vector3 endPos, Quaternion endRot, Bounds hitColliderBounds, Vector3 rayDirection)
         {
-        
+            // Calculate a third point for the curve, based on the collider center and bounds
+            float safeDistance = hitColliderBounds.extents.x;
+            
+            if (hitColliderBounds.extents.y > safeDistance)
+            {
+                safeDistance = hitColliderBounds.extents.y;
+            }
+            
+            if (hitColliderBounds.extents.z > safeDistance)
+            {
+                safeDistance = hitColliderBounds.extents.z;
+            }
+
+            safeDistance *= 2;
+            Vector3 perpendicularVector = new Vector3(-rayDirection.z, 0, rayDirection.x).normalized; // Vector that is perpendicular to ray on the xz-plane
+            Vector3 thirdPoint = hitColliderBounds.center + perpendicularVector * safeDistance;
+
+            Vector3[] path = {startPos, thirdPoint, endPos};
+            // NOTE!!! At this point I would use the Tweening or Spline Libraries path-length calculation. However, DOTweenPath is part of DOTween Pro, which I do not own.
+            // I do not want to rework this skill demo project with another tweening library from scratch now, instead I chose to approximate the distance naively. I would obviously not do so in a proper project.
+            float naiveDistance = Vector3.Distance(startPos, thirdPoint) + Vector3.Distance(thirdPoint, endPos);
+            float tweenTime = naiveDistance / travelSpeed;
+            
+            _positionTween = _cachedMainCamTransform.DOPath(path, tweenTime, PathType.CatmullRom).SetEase(Ease.InOutQuad);
+            _rotationTween = _cachedMainCamTransform.DORotate(endRot.eulerAngles, tweenTime).SetEase(Ease.InOutQuad);
         }
     }
 }
